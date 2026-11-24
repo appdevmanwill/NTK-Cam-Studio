@@ -1,0 +1,36 @@
+{
+  "appId": "com.ntk.camstudio",
+  "productName": "NTK Cam Studio",
+  "npmRebuild": false,
+  "directories": {
+    "output": "release/windows",
+    "buildResources": "build-assets"
+  },
+  "files": [
+    "dist/**/*",
+    "desktop/main.cjs",
+    "desktop/preload.cjs",
+    "build-assets/icon.ico",
+    "package.json",
+    "!node_modules/**/*"
+  ],
+  "asar": true,
+  "win": {
+    "icon": "build-assets/icon.ico",
+    "target": [
+      { "target": "nsis", "arch": ["x64"] },
+      { "target": "portable", "arch": ["x64"] }
+    ]
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "NTK Cam Studio",
+    "artifactName": "NTK-Cam-Studio-Setup-${version}.exe"
+  },
+  "portable": {
+    "artifactName": "NTK-Cam-Studio-Portable-${version}.exe"
+  }
+}

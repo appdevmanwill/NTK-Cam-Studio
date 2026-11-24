@@ -1,0 +1,145 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --studio-bg: #f3f5f9;
+  --studio-surface: #ffffff;
+  --studio-panel: #f8fafc;
+  --studio-border: #e2e8f0;
+  --studio-text: #0f172a;
+  --studio-scroll-thumb: rgba(15, 23, 42, 0.2);
+  --studio-scroll-thumb-hover: rgba(15, 23, 42, 0.36);
+  --studio-slider-track: #cbd5e1;
+  --studio-slider-thumb: #1e293b;
+  --studio-slider-ring: #ffffff;
+}
+
+.dark {
+  --studio-bg: #0b0c0f;
+  --studio-surface: #101217;
+  --studio-panel: #161920;
+  --studio-border: #1f232d;
+  --studio-text: #f4f5f7;
+  --studio-scroll-thumb: rgba(255, 255, 255, 0.14);
+  --studio-scroll-thumb-hover: rgba(255, 255, 255, 0.26);
+  --studio-slider-track: #272b35;
+  --studio-slider-thumb: #f4f5f7;
+  --studio-slider-ring: #0b0c0f;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: var(--font-sans);
+    background-color: var(--studio-bg);
+    color: var(--studio-text);
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* Native mobile safe-area inset helpers */
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Hide scrollbars cleanly on horizontal mobile strips */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom slim studio scrollbars */
+.studio-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.studio-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.studio-scroll::-webkit-scrollbar-thumb {
+  background: var(--studio-scroll-thumb);
+  border-radius: 9999px;
+}
+
+.studio-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--studio-scroll-thumb-hover);
+}
+
+/* Custom studio range inputs */
+input[type="range"].studio-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"].studio-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--studio-slider-track);
+}
+
+input[type="range"].studio-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: var(--studio-slider-thumb);
+  border: 2px solid var(--studio-slider-ring);
+  margin-top: -5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (pointer: coarse) {
+  input[type="range"].studio-slider {
+    min-height: 36px;
+  }
+
+  input[type="range"].studio-slider::-webkit-slider-runnable-track {
+    height: 6px;
+  }
+
+  input[type="range"].studio-slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+    margin-top: -8px;
+  }
+}
+
+input[type="range"].studio-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.12);
+}
+
+input[type="range"].studio-slider:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
